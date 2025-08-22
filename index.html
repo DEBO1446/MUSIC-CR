@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mediaplayer</title>
+    <link rel="stylesheet" href="/src/index.css">
+    <script src="https://kit.fontawesome.com/36424fad6c.js" crossorigin="anonymous"></script>
+</head>
+<body class=" grid place-content-center bg-blend-color bg-black ">
+      <div class="border-1 bg-purple-400  w-sm mt-50 has-autofill: flex-wrap ">
+    <div class=" mt-1.5   flex  gap-64   justify-around">
+
+        <!--- HEAD SECOND START HERE-->
+        <div>
+            <div id="nav" class=" ml-2   ">
+              <i class="fa-solid fa-bars"></i>
+            </div>
+            <div id="menusecion" class=" bg-white hover:text-white hover:bg-purple-400 transition-0.3s mt-[-7px] hidden duration-300 ease-in-out ">
+                <ul class="p-1.5 duration-300 ease-in">
+                    <li class="  hover:bg-gray-500 hover:duration-300 hover:ease-in-out hover:scale-105 hover:p-1">ABOUT-SONG</li>
+                    <li id="loop" class=" hover:bg-gray-500 hover:duration-300  hover:ease-in-out  hover:scale-105 hover:p-1">ON-LOOP <img  class="w-5 inline " src="/loop.png" alt=""></li>
+                    <li class=" hover:bg-gray-500 hover:duration-300  hover:ease-in-out  hover:scale-105 hover:p-1 ">LEARN-MORE</li>
+                </ul>
+            </div>
+        </div>
+        <div id="userclick" class=" rounded-xl p-1.5  hover:bg-white  ">
+            <i   id="user" class="fa-regular fa-user"></i>
+            <p id="userme" class=" duration-200 ease-out text-xs hidden " >USER_NAME</p>
+              </div>
+              </div>
+<!--nav section end here -->
+
+         <!-- IMAGE SECTION IS HERE-->          <div class=" flex  justify-center align-middle">
+                        <div class=" mt-15 rounded-b-[50%] bg-white border-1 border-b-emerald-600">
+                            <img id="imgbanner" class="w-60  rounded-b-[50%]  " src="https://cdn.mos.cms.futurecdn.net/Hpq4NZjKWjHRRyH9bt3Z2e.jpg" alt="">
+                            <video id="video" class=" rounded-b-[50%] hidden" autoplay muted  src="/いきものがかり 『ブルーバード』Music Video.mp4"></video>
+                        </div>
+                        <!--IMAGE SECTION END HERE -->
+                       
+                      </div>
+                      <div class=" flex justify-center mt-2.5 text-xl  font-semibold hover:duration-300 hover:ease-in-out hover:scale-110">
+                        <p class=" uppercase text-gray-100">Ikimonogakari – Blue Bird</p>
+                      </div>
+                      <div class="flext justify-center items-center-safe   flex-wrap"> 
+                        <audio id="orgaudio"  src="/Naruto-Blue-Bird.mp3"></audio>
+                        </div>
+                        <div  class=" ml-12 mt-[-60px] p-3">
+                          <p id="time"></p>
+                          <input id="bar" class="w-70 " min="0" value="0" step="5" type="range" name="">
+                        </div>
+                        <div id="maincntrl" class=" flex justify-center gap-10 mt-[-12px] ">
+                            <div id="prev" class="rounded-2xl hover:bg-white  hover:duration-200 hover:ease-in-out hover:scale-120">
+                            <i class="fa-solid fa-backward fa-xl"></i>
+                            </div>
+                            <div id="play" class="rounded-2xl hover:bg-white  hover:duration-200 hover:ease-in-out hover:scale-120" >
+                             <button id="pause" class=" hidden"> <i id="pause" class="fa-solid fa-pause fa-bounce fa-xl  "></i></button>
+                         <button id="meplay" class=""><i class="fa-solid fa-play fa-bounce fa-xl"></i></button>
+                          </div>
+                          <div id="forward" class="rounded-2xl hover:bg-white  hover:duration-200 hover:ease-in-out hover:scale-120">
+                          <i class="fa-solid fa-forward fa-xl"></i>
+                        </div>
+
+                        </div>
+                       
+              </div>
+    
+    
+
+
+    
+
+</body>
+    <script>
+
+      let nav=document.querySelector('#nav')
+      let menu=document.querySelector('#menusecion')
+        let userinfo=document.querySelector('#userme')
+        let userclick=document.getElementById('userclick')
+        let imgclick=document.getElementById('imgbanner')
+        let videoclick=document.getElementById('video')
+       function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+}
+      nav.addEventListener('click',()=>{
+      // menure()
+       //console.log('target')
+      menu.classList.toggle('hidden')
+      })
+     userclick.addEventListener('mouseover',(e)=>{
+      userinfo.innerText='COMING SOON'
+              // userinfo.classList.remove('hidden')
+       
+        userinfo.classList.toggle('hidden')
+       
+      
+     })
+     userclick.addEventListener('mouseout', () => {
+  userinfo.innerText = '';              // clear text
+ // userinfo.classList.add('hidden');      // hide element
+});
+      imgclick.addEventListener('click',()=>{
+             
+    videoclick.classList.remove('hidden')
+    imgclick.classList.add('hidden')
+      })
+      videoclick.addEventListener('dblclick',()=>{
+        imgclick.classList.remove('hidden')
+        videoclick.classList.add('hidden')
+
+      })
+
+      let audio=document.getElementById('orgaudio')
+      let playtn=document.getElementById('play')
+      let pause=document.getElementById('pause')
+      let meplay=document.getElementById('meplay')
+      playtn.addEventListener('click',()=>{
+        audio.play()
+        meplay.classList.add('hidden')
+        pause.classList.remove('hidden')
+        up.innerHTML=`${formatTime(audio.currentTime)}`
+      // alert("to stop song double click the play button")
+      })
+      playtn.addEventListener('dblclick',()=>{
+        audio.pause()
+        pause.classList.add('hidden')
+        meplay.classList.remove('hidden')
+         up.innerHTML=`${formatTime(audio.currentTime)}`
+      })
+ let prev=document.getElementById('prev')
+ let forward=document.getElementById('forward')
+ prev.addEventListener('click',()=>{
+  audio.currentTime=Math.max(0, audio.currentTime-10)
+   up.innerHTML=`${formatTime(audio.currentTime)}`
+ })
+forward.addEventListener('click',()=>{
+  audio.currentTime=Math.min(audio.duration,audio.currentTime+10)
+  up.innerHTML=`${formatTime(audio.currentTime)}`
+})
+
+let bar=document.getElementById('bar')
+let up=document.getElementById('time')
+
+let on_loop=document.getElementById('loop')
+on_loop.addEventListener('click',()=>{
+audio.loop=true
+on_loop.style.color='green'
+
+})
+on_loop.addEventListener('dblclick',()=>{
+  audio.loop=false
+  
+  on_loop.style.color='red'
+})
+audio.addEventListener('timeupdate',()=>{
+  up.innerHTML = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`
+  bar.max = audio.duration
+  bar.value = audio.currentTime
+  
+})
+bar.addEventListener('input',()=>{
+  audio.currentTime=bar.value
+})
+
+    </script>
+</body>
+</html>
